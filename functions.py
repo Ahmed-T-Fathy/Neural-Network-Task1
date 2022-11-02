@@ -1,5 +1,5 @@
 import random
-import matplotlib as plt
+from matplotlib import pyplot as plt
 import seaborn as sys
 import numpy as np
 def gradient_descent(epochs, rate, x_train, y_train, f1, f2, bias):

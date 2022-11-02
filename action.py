@@ -41,8 +41,6 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     y_train = pa.concat([c1_y_train, c2_y_train])
     x_test = pa.concat([c1_x_test, c2_x_test])
     y_test = pa.concat([c1_y_test, c2_y_test])
-   # e=y_train[0:30]
-  #  w=y_train[30:60]
 
     ##plot data
     plt.figure(figsize=(8, 6))
@@ -50,17 +48,21 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     plt.scatter(c2_x[f1], c2_x[f2], marker='_', color='red')
     plt.show()
     ##model
-    line = fun.gradient_descent(epochs, rate,x_train,y_train,f1,f2)
-    #plot line
+    line = fun.gradient_descent(epochs, rate, x_train, y_train, f1, f2,bias)
+    accurcy = fun.confusion_matrix(line[0], line[1], y_test, x_test, f1, f2, label1_peng[0], label2_peng[0])
+    # plot line
     min_f1 = min(data[f1])
-    max_f1 = max(data[f2])
+    max_f1 = max(data[f1])
     x_values = [(min_f1 - 1), (max_f1 + 1)]
-    y_values = - ( np.multiply(line[0], x_values))/line[1]
+    if(bias==1):
+        y_values = - (line[2]+np.multiply(line[0], x_values)) / line[1]
+    else:
+      y_values = - (np.multiply(line[0], x_values)) / line[1]
     plt.figure(figsize=(8, 6))
-    plt.plot(x_values, y_values, label='Decision Boundary')
     plt.scatter(c1_x[f1], c1_x[f2], marker='+', color='green')
     plt.scatter(c2_x[f1], c2_x[f2], marker='_', color='red')
+
+    plt.plot(x_values, y_values, label='Decision Boundary')
     plt.show()
+    return accurcy
 
-
-run(0.000001, 'bill_depth_mm', 'flipper_length_mm', 'Chinstrap', 'Adelie', 100, 0)

@@ -63,4 +63,4 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     plt.show()
 
 
-run(0.000001, 'bill_depth_mm', 'flipper_length_mm', 'Chinstrap', 'Adelie', 100, 0)
+#run(0.000001, 'bill_depth_mm', 'flipper_length_mm', 'Chinstrap', 'Adelie', 100, 0)

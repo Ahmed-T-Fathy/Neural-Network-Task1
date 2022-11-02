@@ -1,17 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+import action
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-def create_label(window, txt, font, fontSize, row, column, padx=0, pady=0,sticky='w'):
+
+def create_label(window, txt, font, fontSize, row, column, padx=0, pady=0, sticky='w'):
     ttk.Label(window, text=txt, font=(font, fontSize)).grid(row=row, column=column, padx=padx, pady=pady, sticky=sticky)
 
 
 def create_combox(window, values, width, row, column, padx, pady):
     feature = ttk.Combobox(window, width=width)
     feature['values'] = values
-    feature.grid(row=row, column=column, padx=padx, pady=pady,sticky='w')
+    feature.grid(row=row, column=column, padx=padx, pady=pady, sticky='w')
     feature.current()
     return feature
 
@@ -29,6 +31,7 @@ def check_classes(self, event=None):
         class1.current(0)
         class2.current(1)
 
+
 #
 # def combo_box_similarity_values(self, box1, box2,errMsg, event=None):
 #     if (box1.get() == box2.get()):
@@ -39,13 +42,15 @@ def check_classes(self, event=None):
 
 def bias_btn_checked():
     biasbtn = bias_btn_var.get()
-    print(biasbtn)
+    return biasbtn
 
 
 def make_Classification():
-    # call classifier
-    accuracy_value.set('0.89')
-
+    if learningRate.get() and feature1.get() and feature2.get() and class1.get() and class2.get() and epochs.get():
+        action.run(float(learningRate.get()), feature1.get(), feature2.get(), class1.get(), class2.get(),int (epochs.get()),
+                 bias_btn_var.get())
+    else:
+        messagebox.showinfo('Error !!!','the is missed data')
     return "accuracy"
 
 
@@ -94,12 +99,12 @@ epochs.grid(row=7, column=1, padx=0, pady=0)
 
 # check the Bias
 create_label(mainWindow, "Bias:", 'Helvatical bold', 20, 8, 0, padx=20, pady=20)
-bias_btn_var = tk.StringVar()
-ttk.Checkbutton(mainWindow, text="Bias", variable=bias_btn_var, command=bias_btn_checked, onvalue='checked',
-                offvalue='not checked').grid(row=8, column=1)
+bias_btn_var = tk.IntVar()
+ttk.Checkbutton(mainWindow, text="Bias", variable=bias_btn_var, command=bias_btn_checked, onvalue=1,
+                offvalue=0).grid(row=8, column=1)
 
 # run classifier btn
-ttk.Button(mainWindow, text="Run Classifier", width=30, command=make_Classification) \
+ttk.Button(mainWindow, text="Run Classifier", width=30, command=make_Classification)\
     .grid(row=9, column=1, padx=65, pady=20)
 
 # accuracy value txt box
@@ -108,7 +113,6 @@ accuracy_value = tk.StringVar()
 accuracy = ttk.Entry(mainWindow, width=25, textvariable=accuracy_value)
 accuracy.config(state='disabled')
 accuracy.grid(row=10, column=1, padx=0, pady=0, sticky='w')
-
 
 # for plotting
 #

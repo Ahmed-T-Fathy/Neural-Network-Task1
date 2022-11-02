@@ -54,7 +54,7 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     accurcy=fun.confusion_matrix(line[0],line[1],y_test,x_test,f1,f2,label1_peng[0],label2_peng[0])
     #plot line
     min_f1 = min(data[f1])
-    max_f1 = max(data[f2])
+    max_f1 = max(data[f1])
     x_values = [(min_f1 - 1), (max_f1 + 1)]
     y_values = - ( np.multiply(line[0], x_values))/line[1]
     plt.figure(figsize=(8, 6))

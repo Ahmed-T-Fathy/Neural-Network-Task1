@@ -47,8 +47,9 @@ def bias_btn_checked():
 
 def make_Classification():
     if learningRate.get() and feature1.get() and feature2.get() and class1.get() and class2.get() and epochs.get():
-        action.run(float(learningRate.get()), feature1.get(), feature2.get(), class1.get(), class2.get(),int (epochs.get()),
+        accuracy=action.run(float(learningRate.get()), feature1.get(), feature2.get(), class1.get(), class2.get(),int (epochs.get()),
                  bias_btn_var.get())
+        accuracy_value.set(accuracy)
     else:
         messagebox.showinfo('Error !!!','the is missed data')
     return "accuracy"
@@ -110,9 +111,9 @@ ttk.Button(mainWindow, text="Run Classifier", width=30, command=make_Classificat
 # accuracy value txt box
 create_label(mainWindow, "Accuracy :", 'Helvatical bold', 20, 10, 0, padx=20, pady=20)
 accuracy_value = tk.StringVar()
-accuracy = ttk.Entry(mainWindow, width=25, textvariable=accuracy_value)
-accuracy.config(state='disabled')
-accuracy.grid(row=10, column=1, padx=0, pady=0, sticky='w')
+accuracyEntry = ttk.Entry(mainWindow, width=25, textvariable=accuracy_value)
+accuracyEntry.config(state='disabled')
+accuracyEntry.grid(row=10, column=1, padx=0, pady=0, sticky='w')
 
 # for plotting
 #

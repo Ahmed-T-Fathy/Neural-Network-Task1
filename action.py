@@ -49,7 +49,7 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     plt.show()
     ##model
     line = fun.gradient_descent(epochs, rate, x_train, y_train, f1, f2,bias)
-    accurcy = fun.confusion_matrix(line[0], line[1], y_test, x_test, f1, f2, label1_peng[0], label2_peng[0])
+    accurcy = fun.confusion_Matrix(line[0], line[1], y_test, x_test, f1, f2, label1_peng[0], label2_peng[0])
     # plot line
     min_f1 = min(data[f1])
     max_f1 = max(data[f1])

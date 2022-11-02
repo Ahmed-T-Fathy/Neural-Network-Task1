@@ -42,7 +42,7 @@ def signum(input):
 
     return input
 
-def confusion_matrix(w1, w2, y_test, x_test, f1, f2, c1, c2):
+def confusion_Matrix(w1, w2, y_test, x_test, f1, f2, c1, c2):
     y_predicte = signum(w1 * x_test[f1] + w2 * x_test[f2])
     y_actual = y_test.to_numpy()
     TP = TN = FP = FN = P = N = 0

@@ -47,12 +47,20 @@ def bias_btn_checked():
 
 def make_Classification():
     if learningRate.get() and feature1.get() and feature2.get() and class1.get() and class2.get() and epochs.get():
-        accuracy=action.run(float(learningRate.get()), feature1.get(), feature2.get(), class1.get(), class2.get(),int (epochs.get()),
-                 bias_btn_var.get())
+        accuracy = action.run(float(learningRate.get()), feature1.get(), feature2.get(), class1.get(), class2.get(),
+                              int(epochs.get()),
+                              bias_btn_var.get())
         accuracy_value.set(accuracy)
     else:
-        messagebox.showinfo('Error !!!','the is missed data')
+        messagebox.showinfo('Error !!!', 'the is missed data')
     return "accuracy"
+
+
+def classify():
+    if feature1value.get() and feature2value.get():
+        lableValue.set("nouh")
+    else:
+        messagebox.showinfo('Error !!!', 'the is missed data')
 
 
 mainWindow = tk.Tk()
@@ -105,7 +113,7 @@ ttk.Checkbutton(mainWindow, text="Bias", variable=bias_btn_var, command=bias_btn
                 offvalue=0).grid(row=8, column=1)
 
 # run classifier btn
-ttk.Button(mainWindow, text="Run Classifier", width=30, command=make_Classification)\
+ttk.Button(mainWindow, text="Run Classifier", width=30, command=make_Classification) \
     .grid(row=9, column=1, padx=65, pady=20)
 
 # accuracy value txt box
@@ -115,10 +123,28 @@ accuracyEntry = ttk.Entry(mainWindow, width=25, textvariable=accuracy_value)
 accuracyEntry.config(state='disabled')
 accuracyEntry.grid(row=10, column=1, padx=0, pady=0, sticky='w')
 
-# for plotting
-#
-# figure1 = plt.Figure(figsize=(6, 5), dpi=100)
-# ax1 = figure1.add_subplot(111)
-# bar1 = FigureCanvasTkAgg(figure1, mainWindow)
+# Classification sample
+create_label(mainWindow, "Classification sample :", 'Helvatical bold', 20, 11, 0, padx=20, pady=20)
+
+# feature 1 value
+create_label(mainWindow, "feature 1 value:", 'Helvatical', 15, 12, 1, padx=0, pady=0)
+feature1value = ttk.Entry(mainWindow, width=25)
+feature1value.grid(row=13, column=1, padx=0, pady=0)
+
+# feature 1 value
+create_label(mainWindow, "feature 2 value:", 'Helvatical', 15, 12, 3, padx=0, pady=0)
+feature2value = ttk.Entry(mainWindow, width=25)
+feature2value.grid(row=13, column=3, padx=0, pady=0)
+
+# classify btn
+ttk.Button(mainWindow, text="Classify", width=30, command=classify) \
+    .grid(row=14, column=1, padx=65, pady=20)
+
+# accuracy value txt box
+create_label(mainWindow, "Label :", 'Helvatical bold', 20, 15, 0, padx=20, pady=20)
+lableValue = tk.StringVar()
+labelEntry = ttk.Entry(mainWindow, width=25, textvariable=lableValue)
+labelEntry.config(state='disabled')
+labelEntry.grid(row=15, column=1, padx=0, pady=0, sticky='w')
 
 mainWindow.mainloop()

@@ -26,9 +26,7 @@ def gradient_descent(epochs, rate, x_train, y_train, f1, f2, bias):
     else:
         return w1, w2
 
-        w1 = w1 - rate * D_w1  # Update w1
-        w2 = w2 - rate * D_w2  # Update w2
-    return w1, w2
+
 
 
 def signum(input):

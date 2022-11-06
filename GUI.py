@@ -32,13 +32,6 @@ def check_classes(self, event=None):
         class2.current(1)
 
 
-#
-# def combo_box_similarity_values(self, box1, box2,errMsg, event=None):
-#     if (box1.get() == box2.get()):
-#         messagebox.showinfo("Error!!", errMsg)
-#         box1.current(0)
-#         box2.current(1)
-
 
 def bias_btn_checked():
     biasbtn = bias_btn_var.get()

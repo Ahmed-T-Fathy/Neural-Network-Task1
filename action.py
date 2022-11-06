@@ -33,9 +33,7 @@ def run(rate, f1, f2, c1, c2, epochs, bias=0):
     c2 = c2.sample(frac=1)
     c2_y = c2['species']
     c2_x = c2.drop('species', axis=1, inplace=False)
-    c2_x_train, c2_x_test, c2_y_train, c2_y_test = train_test_split(c2_x, c2_y, test_size=0.4, shuffle=True,
-                                                                    random_state=10)
-
+    c2_x_train, c2_x_test, c2_y_train, c2_y_test = train_test_split(c2_x, c2_y, test_size=0.4, shuffle=True,random_state=10)
     ##final data
     x_train = pa.concat([c1_x_train, c2_x_train])
     y_train = pa.concat([c1_y_train, c2_y_train])
